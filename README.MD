@@ -2,7 +2,9 @@
 
 ### Установка через панель управления
 
-В панели адмниистратора зайти в раздел "Расширения/Менеджер расширений/Установка"![1] (https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/1.PNG) и загрузить архив.
+В панели адмниистратора зайти в раздел "Расширения/Менеджер расширений/Установка"
+
+![1](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/1.PNG) и загрузить архив.
 
 
 ### Ручная установка
@@ -22,7 +24,7 @@
 3. Перейти в раздел "VirtueMart/Payment Methods", создать способ оплаты "CloudPayments" и указать все необходимые настройки:
 ![5](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/5.PNG)
 ![6](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/6.PNG)
-![7]https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/7.PNG)
+![7](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/7.PNG)
 
 
 ### Настройка вебхуков
