@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="2.5" type="plugin" group="vmpayment">
+    
+    <name>CloudPayments</name>
+    <creationDate>February 2018</creationDate>
+    <author>CloudPayments</author>
+    <authorUrl>http://cloudpayments.ru/</authorUrl>
+    <copyright>cloudpayments.ru</copyright>
+    <license></license>
+    <version>1.0</version>
+    <description><![CDATA[<a href="https://cloudpayments.ru/" target="_blank">CloudPayments</a>]]></description>
+    
+    <files>
+        <filename plugin="cloudpayments">cloudpayments.php</filename>
+        <filename plugin="cloudpayments">readme.md</filename>
+        <folder>language</folder>
+    </files>
+
+    <vmconfig>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="/administrator/components/com_virtuemart/fields">
+                <field type="text" name="public_id"  size="50" label="Public ID" default="" description="" />
+                
+                <field type="text" name="api_password"  size="50" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_API_PASSWORD" default="" description="" />
+
+                <field type="list" name="scheme" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_SCHEME"
+                     default="sms" description="" >
+                     <option value="sms">SMS</option>
+                     <option value="dms">DMS</option>
+                </field>
+
+                <field type="list" name="send_check" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_SEND_CHECK_LABEL"
+                     default="1" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_SEND_CHECK_DESCRIPTION" >
+                     <option value="1">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_SEND_CHECK_YES</option>
+                     <option value="0">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_SEND_CHECK_NO</option>
+                </field>
+
+                <field type="list" name="localization" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_LOCALIZATION_LABEL"
+                       default="ru-RU" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_LOCALIZATION_DESCRIPTION" >
+                    <option value="ru-RU">Русский</option>
+                    <option value="en-US">Английский</option>
+                    <option value="lv">Латышский</option>
+                    <option value="az">Азербайджанский</option>
+                    <option value="kk-KZ">Казахский</option>
+                    <option value="uk">Украинский</option>
+                    <option value="pl">Польский</option>
+                    <option value="pt">Португальский</option>
+                </field>
+
+                <field type="list" name="tax_system" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_LABEL"
+                       default="0" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_DESCRIPTION" >
+                    <option value="0">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_0</option>
+                    <option value="1">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_1</option>
+                    <option value="2">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_2</option>
+                    <option value="3">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_3</option>
+                    <option value="4">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_4</option>
+                    <option value="5">COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_5</option>
+                </field>
+
+                <field name="status_success" type="vmorderstate" scope="com_virtuemart" default="C" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_SUCCESS_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_SUCCESS_DESCRIPTION" />
+                
+                <field name="status_pending" type="vmorderstate" scope="com_virtuemart" default="P" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_PENDING_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_PENDING_DESCRIPTION" />
+
+                <field name="status_cp_authorized" type="vmorderstate" scope="com_virtuemart" default="A" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CP_AUTHORIZED_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CP_AUTHORIZED_DESCRIPTION" />
+
+                <field name="status_cp_confirmed" type="vmorderstate" scope="com_virtuemart" default="С" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CP_CONFIRMED_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CP_CONFIRMED_DESCRIPTION" />
+
+                <field name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="X" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CANCELED_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CANCELED_DESCRIPTION" />
+
+                <field name="status_refund" type="vmorderstate" scope="com_virtuemart" default="R" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_REFUND_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_REFUND_DESCRIPTION" />
+                
+            </fieldset>
+        </fields>
+    </vmconfig>
+
+</extension>
