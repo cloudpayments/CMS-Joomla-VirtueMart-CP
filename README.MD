@@ -9,7 +9,7 @@ Joomla >= 3.8.4
 • Отмена, подтверждение и возврат платежей из ЛК CMS;
 • Поддержка онлайн-касс (ФЗ-54);
 • Отправка чеков по email;
-• Отправка уведомлений по SMS;
+• Отправка чеков по SMS;
 
 ### Установка через панель управления
 
@@ -58,11 +58,10 @@ http://**yourdomain.name**/index.php?option=com_virtuemart&view=pluginresponse&t
 
 Открыв его, вы увидите ответ:
 ![8](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/8.PNG)
-Если все верно, то настройки ЧПУ преобразуют ссылку в ту, которую вам необходимо прописать в ЛК CloudPayments.
+Если все верно, то настройки ЧПУ преобразуют ссылку,
+например, в http://**yourdomain.name**/ru/?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&cloudpayments_check
 
-Например, в http://**yourdomain.name**/ru/?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&cloudpayments_check
-
-Аналогичным образом  необходимо настроить все вебхуки.
+Таким образом с полученными ссылками настройте вебхуки в ЛК CloudPayments
 
 ![9](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/9.PNG)
 
@@ -70,3 +69,4 @@ http://**yourdomain.name**/index.php?option=com_virtuemart&view=pluginresponse&t
 Внимание!!! Убедитесь, что используемые валюты в глобальных настройках VirtueMart'а,
  а именно их трехбуквенные наименования совпадают с  параметрами, поддерживающимися сервисом отправки чеков.
 https://cloudpayments.ru/Docs/Directory#currencies
+Так же будьте внимательны с настройками НДС.
