@@ -61,7 +61,8 @@ http://**yourdomain.name**/index.php?option=com_virtuemart&view=pluginresponse&t
 Если все верно, то настройки ЧПУ преобразуют ссылку,
 например, в http://**yourdomain.name**/ru/?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&cloudpayments_check
 
-Таким образом с полученными ссылками настройте вебхуки в ЛК CloudPayments
+Преобразованная ссылка  будет являться необходимым URL для check-уведомления в ЛК CloudPayments.
+Аналогичным образом настройте остальные вебхуки.
 
 ![9](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/9.PNG)
 
