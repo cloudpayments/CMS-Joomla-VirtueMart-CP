@@ -33,7 +33,7 @@ Joomla >= 3.8.4
 ![4](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/4.PNG)
 
 
-3. Перейти в раздел "VirtueMart/Payment Methods", создать способ оплаты "CloudPayments" и указать все необходимые настройки:
+3. Перейти в раздел "VirtueMart/Payment Methods", создать способ оплаты "CloudPayments" и указать все необходимые настройки:  
 ![5](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/5.PNG)
 ![6](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/6.PNG)
 ![7](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/7.PNG)
@@ -69,5 +69,5 @@ http://**yourdomain.name**/index.php?option=com_virtuemart&view=pluginresponse&t
 
 Внимание!!! Убедитесь, что используемые валюты в глобальных настройках VirtueMart'а,
  а именно их трехбуквенные наименования совпадают с  параметрами, поддерживающимися сервисом отправки чеков.
-https://cloudpayments.ru/Docs/Directory#currencies
+https://cloudpayments.ru/Docs/Directory#currencies  
 Так же будьте внимательны с настройками НДС.
