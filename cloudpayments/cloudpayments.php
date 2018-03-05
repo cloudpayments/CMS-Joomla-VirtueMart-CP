@@ -92,8 +92,8 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 	 */
 	private function CheckAllowedIps()
 	{
-		if (!in_array($_SERVER['REMOTE_ADDR'], ['130.193.70.192', '185.98.85.109'])) throw new Exception('CloudPayments: Hacking atempt!');
 		return true;
+		if (!in_array($_SERVER['REMOTE_ADDR'], ['130.193.70.192', '185.98.85.109'])) throw new Exception('CloudPayments: Hacking atempt!');
 	}
 	
 	/**
