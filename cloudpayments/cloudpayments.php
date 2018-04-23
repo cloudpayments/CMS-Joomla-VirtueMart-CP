@@ -84,7 +84,7 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 		 * Дефолтная логика
 		 */
 		vmDebug('plgVmOnPaymentResponseReceived');
-		return $this->plgVmOnPaymentResponseReceived($html);
+//		return $this->plgVmOnPaymentResponseReceived($html);
 	}
 	
 	/**
@@ -600,11 +600,12 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 	 * @param $virtuemart_payment_id
 	 * @return mixed
 	 */
-	function plgVmOnShowOrderBEPayment($virtuemart_order_id, $virtuemart_payment_id)
-	{
-		vmDebug('plgVmOnShowOrderBEPayment');
-		return $this->plgVmOnShowOrderBEPayment($virtuemart_order_id, $virtuemart_payment_id);
-	}
+	// 2018.04.21 - закоментировал т.к. не корректно открывался заказ в админке.
+//	function plgVmOnShowOrderBEPayment($virtuemart_order_id, $virtuemart_payment_id)
+//	{
+//		vmDebug('plgVmOnShowOrderBEPayment');
+//		return $this->plgVmOnShowOrderBEPayment($virtuemart_order_id, $virtuemart_payment_id);
+//	}
 	
 	/**
 	 * Срабатывает до показа корзины

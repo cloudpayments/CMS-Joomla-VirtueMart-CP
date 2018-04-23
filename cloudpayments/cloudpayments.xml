@@ -7,7 +7,7 @@
     <authorUrl>http://cloudpayments.ru/</authorUrl>
     <copyright>cloudpayments.ru</copyright>
     <license></license>
-    <version>1.0</version>
+    <version>0.4.1</version>
     <description><![CDATA[<a href="https://cloudpayments.ru/" target="_blank">CloudPayments</a>]]></description>
     
     <files>
@@ -58,7 +58,7 @@
                 </field>
 
                 <field name="status_success" type="vmorderstate" scope="com_virtuemart" default="C" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_SUCCESS_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_SUCCESS_DESCRIPTION" />
-                
+
                 <field name="status_pending" type="vmorderstate" scope="com_virtuemart" default="P" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_PENDING_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_PENDING_DESCRIPTION" />
 
                 <field name="status_cp_authorized" type="vmorderstate" scope="com_virtuemart" default="A" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CP_AUTHORIZED_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CP_AUTHORIZED_DESCRIPTION" />
@@ -68,7 +68,7 @@
                 <field name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="X" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CANCELED_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_CANCELED_DESCRIPTION" />
 
                 <field name="status_refund" type="vmorderstate" scope="com_virtuemart" default="R" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_REFUND_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_REFUND_DESCRIPTION" />
-                
+
             </fieldset>
         </fields>
     </vmconfig>
