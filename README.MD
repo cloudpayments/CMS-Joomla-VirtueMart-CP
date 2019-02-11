@@ -24,24 +24,27 @@ Joomla >= 3.8.4
 
 ### Ручная установка
 
-Распаковать из архива каталог cloudpayments и загрузить в папку plugins/vmpayment
+1. Распаковать из архива каталог cloudpayments и загрузить в папку plugins/vmpayment
 ![2](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/2.PNG).
+
+2. Зайти в раздел поиска, найти и установить модуль "Расширение/Менеджер расширений/Управление"  
+![2-1](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/2-1.png).
+
+3. Перейти в управление модулями, найти и включить способ оплаты "Расширение/Менеджер расширений/Найти"  
+![2-2](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/2-2.png).
 
 ### Настройка модуля
 
 1. Перейти в настройки модуля "Система/Панель управления" -> "Менеджер языков" -> "Переопределение констант"   
 ![3](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/3.PNG).
 
-
 2. Переопределить значение константы COM_VIRTUEMART_ORDER_STATUS_CP_AUTHORIZED для используемого языка панели управления на "CP-Платёж авторизован (Деньги заблокированы)"  
 ![4](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/4.PNG)
-
 
 3. Перейти в раздел "VirtueMart/Payment Methods", создать способ оплаты "CloudPayments" и указать все необходимые настройки:  
 ![5](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/5.PNG)
 ![6](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/6.PNG)
 ![7](https://github.com/cloudpayments/CMS-Joomla-VirtueMart-CP/blob/master/Images/7.PNG)
-
 
 ### Настройка вебхуков:
 
