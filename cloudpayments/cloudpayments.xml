@@ -7,7 +7,7 @@
     <authorUrl>http://cloudpayments.ru/</authorUrl>
     <copyright>cloudpayments.ru</copyright>
     <license></license>
-    <version>0.4.1</version>
+    <version>0.4.2</version>
     <description><![CDATA[<a href="https://cloudpayments.ru/" target="_blank">CloudPayments</a>]]></description>
     
     <files>
@@ -45,6 +45,7 @@
                     <option value="uk">Украинский</option>
                     <option value="pl">Польский</option>
                     <option value="pt">Португальский</option>
+                    <option value="uz">Узбекский</option>
                 </field>
 
                 <field type="list" name="tax_system" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_TAX_SYSTEM_LABEL"
@@ -69,6 +70,9 @@
 
                 <field name="status_refund" type="vmorderstate" scope="com_virtuemart" default="R" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_REFUND_LABEL" description="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_STATUS_REFUND_DESCRIPTION" />
 
+                <field type="text" name="spic"  size="50" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_SHIPPING_CODE_IKPU" default="" description="" />
+
+                <field type="text" name="packageCode"  size="50" label="COM_VIRTUEMART_PLUGIN_CLOUDPAYMENTS_XML_SHIPPING_PACKAGE_CODE" default="" description="" />
             </fieldset>
         </fields>
     </vmconfig>

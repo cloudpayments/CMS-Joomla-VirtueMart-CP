@@ -331,37 +331,66 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 			if ($method->status_pending == $oOrder['details']['BT']->order_status) {
 				$sDescription = 'Order number: ' .$oOrder['details']['BT']->order_number;
 				$oCurrencyModel = VmModel::getModel('currency');
-				$sCurrencyName = 'RUB';
+        $currency = $oCurrencyModel->getCurrency($method->currency_id);
+				$sCurrencyName = $currency->currency_code_3 ?? 'RUB';
+        $AdditionalReceiptInfos = false;
 				$sItems = '[';
-				$iCurrency = 0;
 				foreach ($oOrder['items'] as $oProduct) {
-					$currency = $oCurrencyModel->getCurrency($oProduct->allPrices[0]['product_currency']);
-//					$sDescription .= $oProduct->product_name . ': ' . $oProduct->product_quantity . 'x' .round($oProduct->product_final_price, 2) .$currency->currency_code_3.
-//						' (в т.ч. налог ' . round($oProduct->product_tax*$oProduct->product_quantity,2) . $currency->currency_code_3.'), ';
-					$sCurrencyName = $currency->currency_code_3;
-					if ($iCurrency == 0) $iCurrency = $currency->virtuemart_currency_id;
-					if ($iCurrency > 0 && $iCurrency != $currency->virtuemart_currency_id) exit('All products must have only one currence for paying');
 					$aTax = current($oProduct->prices['Tax']);
-					$sItems .= "{
-						\"label\": '".$oProduct->product_name."', //наименование товара
-						\"price\": ".round($oProduct->product_final_price,2).", //цена
-						\"quantity\": ".$oProduct->product_quantity.", //количество
-						\"amount\": ".round($oProduct->product_subtotal_with_tax,2).", //сумма
-						\"vat\": ".(isset($aTax[1]) ? round($aTax[1], 2) : 0)." //ставка НДС
-					},";
+
+          foreach ($oProduct->customfields as $field) {
+            if($field->custom_title === 'CodeIKPU') $spic = $field->customfields_value;
+            elseif($field->custom_title === 'PackageCode') $packageCode = $field->customfields_value;
+          }
+
+          if (isset($spic) && isset($packageCode)) {
+            $sItems .= "{
+              \"label\": '".$oProduct->product_name."', //наименование товара
+              \"price\": ".round($oProduct->product_final_price,2).", //цена
+              \"quantity\": ".$oProduct->product_quantity.", //количество
+              \"amount\": ".round($oProduct->product_subtotal_with_tax,2).", //сумма
+              \"vat\": ".(isset($aTax[1]) ? round($aTax[1], 2) : 0).", //ставка НДС
+              \"spic\": '".$spic."', //код ИКПУ
+              \"packageCode\": '".$packageCode."' //код упаковки
+            },";
+
+            if(!$AdditionalReceiptInfos) {
+              $AdditionalReceiptInfos = true;
+            }
+          } else {
+            $sItems .= "{
+              \"label\": '".$oProduct->product_name."', //наименование товара
+              \"price\": ".round($oProduct->product_final_price,2).", //цена
+              \"quantity\": ".$oProduct->product_quantity.", //количество
+              \"amount\": ".round($oProduct->product_subtotal_with_tax,2).", //сумма
+              \"vat\": ".(isset($aTax[1]) ? round($aTax[1], 2) : 0)." //ставка НДС
+            },";
+          }
 				}
 				/**
 				 * Доставка
 				 */
-				if ($oOrder['details']['BT']->order_billTax && $oOrder['details']['BT']->order_shipment) {
+				if ($oOrder['details']['BT']->order_billTax || $oOrder['details']['BT']->order_shipment) {
 					$aTax = current(json_decode($oOrder['details']['BT']->order_billTax));
-					$sItems .= "{
-						\"label\": 'Доставка',
-						\"price\": ".round($oOrder['details']['BT']->order_shipment + $oOrder['details']['BT']->order_shipment_tax,2).", //цена
-						\"quantity\": 1, //количество
-						\"amount\": ".round($oOrder['details']['BT']->order_shipment + $oOrder['details']['BT']->order_shipment_tax,2).", //сумма
-						\"vat\": ".round($aTax->calc_value,2)." //ставка НДС
-					},";
+          if (isset($method->spic) && isset($method->packageCode)) {
+            $sItems .= "{
+              \"label\": 'Доставка',
+              \"price\": ".round($oOrder['details']['BT']->order_shipment + $oOrder['details']['BT']->order_shipment_tax,2).", //цена
+              \"quantity\": 1, //количество
+              \"amount\": ".round($oOrder['details']['BT']->order_shipment + $oOrder['details']['BT']->order_shipment_tax,2).", //сумма
+              \"vat\": ".round($aTax->calc_value,2).", //ставка НДС
+              \"spic\": '".$method->spic."', //код ИКПУ доставки
+              \"packageCode\": '".$method->packageCode."' //код упаковки доставки
+            },";
+          } else {
+            $sItems .= "{
+              \"label\": 'Доставка',
+              \"price\": ".round($oOrder['details']['BT']->order_shipment + $oOrder['details']['BT']->order_shipment_tax,2).", //цена
+              \"quantity\": 1, //количество
+              \"amount\": ".round($oOrder['details']['BT']->order_shipment + $oOrder['details']['BT']->order_shipment_tax,2).", //сумма
+              \"vat\": ".round($aTax->calc_value,2)." //ставка НДС 
+            },";
+          }
 				}
 				$sItems = trim($sItems, ',').']';
 //				$sDescription .= 'Доставка: ' . round($oOrder['details']['BT']->order_shipment, 2).$currency->currency_code_3;
@@ -370,6 +399,8 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 					$paymentCurrency = CurrencyDisplay::getInstance($method->payment_currency);
 					$totalInPaymentCurrency = round($paymentCurrency->convertCurrencyTo($method->payment_currency, $oOrder['details']['BT']->order_total, false), 2);
 					$sPhone = $oOrder['details']['BT']->phone_1 ? $oOrder['details']['BT']->phone_1 : ($oOrder['details']['BT']->phone_2 ? $oOrder['details']['BT']->phone_2 : '');
+          if ($AdditionalReceiptInfos) $customerReceipt = "{ customerReceipt: { Items:".$sItems.", taxationSystem: ".$method->tax_system.", email: '".$oOrder['details']['BT']->email."', phone: '".$sPhone."', AdditionalReceiptInfos: ['Вы стали обладателем права на 1% cashback']} }";
+          else $customerReceipt = "{ customerReceipt: { Items:".$sItems.", taxationSystem: ".$method->tax_system.", email: '".$oOrder['details']['BT']->email."', phone: '".$sPhone."'} }";
 					$html .= "<div id=\"cloudpayment_pay\"><button id=\"cloudpayment_pay_button\">Оплатить</button></div>
 					<script src=\"https://widget.cloudpayments.ru/bundles/cloudpayments\"></script>
 					<script>
@@ -389,7 +420,7 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 									email: '". $oOrder['details']['BT']->email ."',
 									data: {
 										order_number: '" . $oOrder['details']['BT']->order_number . "', //произвольный набор параметров
-										". ($method->send_check == 1 ? "cloudPayments: { customerReceipt: { Items:".$sItems.", taxationSystem: ".$method->tax_system.", email: '".$oOrder['details']['BT']->email."', phone: '".$sPhone."'} }" : "") ."
+										cloudPayments: ". ($method->send_check ? $customerReceipt : "") ."
 									}
 								},
 								function (options) { // success
@@ -592,20 +623,6 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 		
 		return $SQLfields;
 	}
-	
-	/**
-	 * Срабатывает после оформления заказа
-	 * Display stored payment data for an order
-	 * @param $virtuemart_order_id
-	 * @param $virtuemart_payment_id
-	 * @return mixed
-	 */
-	// 2018.04.21 - закоментировал т.к. не корректно открывался заказ в админке.
-//	function plgVmOnShowOrderBEPayment($virtuemart_order_id, $virtuemart_payment_id)
-//	{
-//		vmDebug('plgVmOnShowOrderBEPayment');
-//		return $this->plgVmOnShowOrderBEPayment($virtuemart_order_id, $virtuemart_payment_id);
-//	}
 	
 	/**
 	 * Срабатывает до показа корзины
