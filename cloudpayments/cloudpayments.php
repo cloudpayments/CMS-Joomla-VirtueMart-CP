@@ -339,8 +339,8 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 					$aTax = current($oProduct->prices['Tax']);
 
           foreach ($oProduct->customfields as $field) {
-            if($field->custom_title === 'CodeIKPU') $spic = $field->customfields_value;
-            elseif($field->custom_title === 'PackageCode') $packageCode = $field->customfields_value;
+            if($field->custom_title === 'CodeIKPU') $spic = $field->customfield_value;
+            elseif($field->custom_title === 'PackageCode') $packageCode = $field->customfield_value;
           }
 
           if (isset($spic) && isset($packageCode)) {
