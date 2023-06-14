@@ -401,8 +401,15 @@ class plgVmPaymentCloudPayments extends vmPSPlugin
 					$sPhone = $oOrder['details']['BT']->phone_1 ? $oOrder['details']['BT']->phone_1 : ($oOrder['details']['BT']->phone_2 ? $oOrder['details']['BT']->phone_2 : '');
           if ($AdditionalReceiptInfos) $customerReceipt = "{ customerReceipt: { Items:".$sItems.", taxationSystem: ".$method->tax_system.", email: '".$oOrder['details']['BT']->email."', phone: '".$sPhone."', AdditionalReceiptInfos: ['Вы стали обладателем права на 1% cashback']} }";
           else $customerReceipt = "{ customerReceipt: { Items:".$sItems.", taxationSystem: ".$method->tax_system.", email: '".$oOrder['details']['BT']->email."', phone: '".$sPhone."'} }";
+          $ch = curl_init('https://api.cloudpayments.ru/merchant/configuration/'.$method->public_id);
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+          curl_setopt($ch, CURLOPT_HEADER, false);
+          $client = json_decode(curl_exec($ch));
+          curl_close($ch);
+          $widgetUrl = $client->Model->WidgetUrl ?? 'https://widget.cloudpayments.ru/';
 					$html .= "<div id=\"cloudpayment_pay\"><button id=\"cloudpayment_pay_button\">Оплатить</button></div>
-					<script src=\"https://widget.cloudpayments.ru/bundles/cloudpayments\"></script>
+					<script src=\"".$widgetUrl."bundles/cloudpayments\"></script>
 					<script>
 						var oBut = document.getElementById('cloudpayment_pay_button');
 						var oButWrap = document.getElementById('cloudpayment_pay');
